@@ -75,8 +75,10 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     """""
       send email = password_reset
       confirm and change password = password_reset/confirm
+      required in confirm form: token, password
       """""
-    email_plaintext_message = "{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
+    email_plaintext_message = "{}?token={}".format(reverse('password_reset:reset-password-request'),
+        reset_password_token.key)+"   copy token in  http://127.0.0.1:8000/password_reset/confirm to change your passsword"
 
     send_mail(
         # title:

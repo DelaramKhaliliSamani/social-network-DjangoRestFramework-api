@@ -143,7 +143,17 @@ AUTH_USER_MODEL = "accounts.User"
 LOGIN_URL ='/accounts/login/'
 
 # Google account
+
+
+"""""
+show token on terminal
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+"""""
+
+"""""
+send token by mail
+"""""
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'deli.khalili73@gmail.com'
 EMAIL_PORT = 587
