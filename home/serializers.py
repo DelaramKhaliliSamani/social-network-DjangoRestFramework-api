@@ -11,11 +11,16 @@ class PostCreateSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
+    votes = serializers.SerializerMethodField()
     user =UserEmailNameRelationalField(read_only=True)
 
     class Meta:
         model = Post
         fields = '__all__'
+
+    def get_votes(self, obj):
+        result = obj.pvotes.all()
+        return VoteSerializer(instance=result, many=True).data
 
     def get_comments(self, obj):
          result = obj.pcomments.all()

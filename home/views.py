@@ -139,10 +139,10 @@ class VoteView(APIView):
         if not already_liked:
             new_like = Vote(post=post, user=user)
             new_like.save()
-            follower_count = Vote.objects.filter(user=user).count()
-            return JsonResponse({'status': 'Following', 'count': follower_count})
+            like_count = Vote.objects.filter(user=user).count()
+            return JsonResponse({'status': 'liked', 'like_count': like_count})
         else:
             already_liked.delete()
-            follower_count = Vote.objects.filter(user=user).count()
-            return JsonResponse({'status': 'Not following', 'count': follower_count})
+            like_count = Vote.objects.filter(user=user).count()
+            return JsonResponse({'status': 'dislike', 'like_count': like_count})
         return redirect('/')

@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -14,7 +15,7 @@ SECRET_KEY = 'django-insecure-skg4osziw%!_qw+7v_xwg9n!7w!&5t3yffoz1+a9ict5yxd6z1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1' , 'localhost']
 
 
 # Application definition
@@ -30,11 +31,14 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
     'drf_spectacular',
+    'corsheaders',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -109,7 +113,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
 #Media files
 MEDIA_URL = '/media/'
@@ -117,6 +121,18 @@ MEDIA_ROOT = BASE_DIR /'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+
+
+DEFAULT_RENDERER_CLASSES=[
+    'rest_framework.renderers.JSONRenderer'
+
+
+]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -126,7 +142,7 @@ AUTH_USER_MODEL = "accounts.User"
 LOGIN_URL ='/accounts/login/'
 
 # Google account
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'deli.khalili73@gmail.com'
 EMAIL_PORT = 587

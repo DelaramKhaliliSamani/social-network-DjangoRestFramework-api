@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserSerializer, ProfileSerializer, DirectMessageSerializer, RelationSerializer, \
-    UserRegisterSerializer, DirectMessageCreateSerializer, ProfileCreateSerializer
-from rest_framework import status
+    UserRegisterSerializer, DirectMessageCreateSerializer, ProfileCreateSerializer, ChangePasswordSerializer
+from rest_framework import status, generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import User, DirectMessage, Profile, Relation
@@ -64,6 +64,41 @@ class UserViewSet(viewsets.ViewSet):
         user.is_active = False
         user.save()
         return Response({'message': 'user deactivated'})
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+    """
+    An endpoint for changing password.
+    """
+    serializer_class = ChangePasswordSerializer
+    model = User
+    permission_classes = [IsAuthenticated,]
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MessageCreate(APIView):
     """""
@@ -194,11 +229,11 @@ class FollowView(APIView):
             new_follower = Relation(to_user=user, from_user=request.user)
             new_follower.save()
             follower_count = Relation.objects.filter(to_user=user).count()
-            return JsonResponse({'status': 'Following', 'count': follower_count})
+            return JsonResponse({'status': 'Following', 'followers': follower_count})
         else:
             already_followed.delete()
             follower_count = Relation.objects.filter(to_user=user).count()
-            return JsonResponse({'status': 'Not following', 'count': follower_count})
+            return JsonResponse({'status': 'unfollowed', 'followers': follower_count})
         return redirect('/')
 
 
