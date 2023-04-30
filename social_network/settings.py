@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-skg4osziw%!_qw+7v_xwg9n!7w!&5t3yffoz1+a9ict5yxd6z1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1' , 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -28,11 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_rest_passwordreset',
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
     'drf_spectacular',
     'corsheaders',
-    'django_rest_passwordreset',
+
 ]
 
 MIDDLEWARE = [
@@ -146,7 +147,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'deli.khalili73@gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = 'vnwxoxcngcciertc'
+EMAIL_HOST_PASSWORD = 'kyleewscwbwunkwc'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Company X'
 

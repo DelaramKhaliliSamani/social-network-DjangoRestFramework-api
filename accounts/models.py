@@ -56,6 +56,7 @@ class DirectMessage(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
     body = models.CharField(max_length=100)
+    doc = models.FileField(upload_to='docs/%Y/%m/%d', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -83,7 +84,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         # message:
         email_plaintext_message,
         # from:
-        "deli.khalili73@gmail.com",
+        "Company X",
         # to:
         [reset_password_token.user.email]
     )

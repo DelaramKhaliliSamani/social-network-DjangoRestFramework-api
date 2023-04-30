@@ -43,7 +43,7 @@ class ChangePasswordSerializer(serializers.Serializer):
 class DirectMessageCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = DirectMessage
-        fields = ('body',)
+        fields = ('body','doc')
 
 class DirectMessageSerializer(serializers.ModelSerializer):
     class Meta:

@@ -8,7 +8,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    path('/', include('django_rest_passwordreset.urls', namespace='password_reset')),
     path('react/', TemplateView.as_view(template_name='react.html')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
