@@ -19,8 +19,7 @@ class UserRegister(APIView):
         if ser_data.is_valid():
             ser_data.create(ser_data.validated_data)
             return Response(ser_data.data, status=status.HTTP_201_CREATED)
-        return Response(ser_data.errors, status=status.HTTP_400_BAD_REQUEST) #ok
-
+        return Response(ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated, ]
@@ -31,7 +30,7 @@ class UserViewSet(viewsets.ViewSet):
     """""
     def list(self, request):
         srz_data = UserSerializer(instance=self.queryset, many=True)
-        return Response(data=srz_data.data)
+        return Response(data=srz_data.data, status=status.HTTP_200_OK)
     """""
     show a particular user
     pk = user_id
@@ -39,7 +38,7 @@ class UserViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         user = get_object_or_404(self.queryset, pk=pk)
         srz_data = UserSerializer(instance=user)
-        return Response(data=srz_data.data)
+        return Response(data=srz_data.data, status=status.HTTP_200_OK)
     """""
     update a user
     pk = user_id
@@ -51,7 +50,7 @@ class UserViewSet(viewsets.ViewSet):
         srz_data = UserSerializer(instance=user, data=request.POST, partial=True)
         if srz_data.is_valid():
             srz_data.save()
-            return Response(data=srz_data.data)
+            return Response(data=srz_data.data, status=status.HTTP_200_OK)
         return Response(data=srz_data.errors)
     """""
     deactive a user
@@ -65,11 +64,7 @@ class UserViewSet(viewsets.ViewSet):
         user.save()
         return Response({'message': 'user deactivated'})
 
-
 class ChangePasswordView(generics.UpdateAPIView):
-    """
-    An endpoint for changing password.
-    """
     serializer_class = ChangePasswordSerializer
     model = User
     permission_classes = [IsAuthenticated,]
@@ -89,14 +84,7 @@ class ChangePasswordView(generics.UpdateAPIView):
             # set_password also hashes the password that the user will get
             self.object.set_password(serializer.data.get("new_password"))
             self.object.save()
-            response = {
-                'status': 'success',
-                'code': status.HTTP_200_OK,
-                'message': 'Password updated successfully',
-                'data': []
-            }
-
-            return Response(response)
+            return Response({"message":"Password updated successfully"}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -214,7 +202,6 @@ class ProfileViewSet(viewsets.ViewSet):
             return Response(data=srz_data.data)
         return Response(data=srz_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class FollowView(APIView):
     """""
     follow and unfollow a user 
@@ -229,11 +216,11 @@ class FollowView(APIView):
             new_follower = Relation(to_user=user, from_user=request.user)
             new_follower.save()
             follower_count = Relation.objects.filter(to_user=user).count()
-            return JsonResponse({'status': 'Following', 'followers': follower_count})
+            return Response({'status': 'Following', 'followers': follower_count}, status=status.HTTP_200_OK)
         else:
             already_followed.delete()
             follower_count = Relation.objects.filter(to_user=user).count()
-            return JsonResponse({'status': 'unfollowed', 'followers': follower_count})
+            return Response({'status': 'unfollowed', 'followers': follower_count}, status=status.HTTP_200_OK)
         return redirect('/')
 
 

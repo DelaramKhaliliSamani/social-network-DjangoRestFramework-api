@@ -47,7 +47,7 @@ class Relation(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='puser')
     bio = models.TextField(null=True, blank=True)
-    img = models.ImageField(upload_to='profile_img/%Y/%m/%d')
+    img = models.ImageField(upload_to='profile_img/%Y/%m/%d', null=True, blank=True)
 
 
 

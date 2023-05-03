@@ -75,7 +75,13 @@ class PostViewSet(viewsets.ViewSet):
     create a comment
     pk=post_id
     """""
+
 class CommentCreate(APIView):
+    """""
+    view a particular user posts
+    pk = post_id
+    """""
+
     permission_classes = [IsAuthenticated, ]
     serializer_class = CommentCreateSerializer
     def post(self, request, pk):
@@ -140,9 +146,9 @@ class VoteView(APIView):
             new_like = Vote(post=post, user=user)
             new_like.save()
             like_count = Vote.objects.filter(user=user).count()
-            return JsonResponse({'status': 'liked', 'like_count': like_count})
+            return Response({'status': 'liked', 'like_count': like_count}, status=status.HTTP_200_OK)
         else:
             already_liked.delete()
             like_count = Vote.objects.filter(user=user).count()
-            return JsonResponse({'status': 'dislike', 'like_count': like_count})
+            return Response({'status': 'dislike', 'like_count': like_count}, status=status.HTTP_200_OK)
         return redirect('/')
