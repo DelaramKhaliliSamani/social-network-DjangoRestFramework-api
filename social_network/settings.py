@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-skg4osziw%!_qw+7v_xwg9n!7w!&5t3yffoz1+a9ict5yxd6z1
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
+    'usermanual.apps.UsermanualConfig',
     'drf_spectacular',
     'corsheaders',
 
@@ -116,6 +117,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
+
 #Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
@@ -124,7 +126,23 @@ MEDIA_ROOT = BASE_DIR /'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
 
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 
 

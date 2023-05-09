@@ -138,7 +138,7 @@ class VoteView(APIView):
     """""
     permission_classes = [IsAuthenticated, ]
     serializer_class = VoteSerializer
-    def get(self, request, pk):
+    def post(self, request, pk):
         user = request.user
         post = get_object_or_404(Post, pk=pk)
         already_liked = Vote.objects.filter(post=post, user=user).first()

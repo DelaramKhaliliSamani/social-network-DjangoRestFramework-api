@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel Manual</title>
+        <style>
+        .jumbotron{
+            padding: 50px;
+            padding-left: 200px;;
+            padding-right: 600px;
+            margin-bottom: 20px;
+            background-color: whitesmoke;
+        }
+    </style>
+    <style>
+        .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+    </style>
+    <style>
+        .justify {
+          text-align: justify;
+          text-justify: inter-word;
+}
+    </style>
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <div class=navbar-nav>
+                <a class="nav-link active" >Admin Panel Manual</a>
+            </div>
+            </div>
+        </nav>
+
+ <div class="jumbotron">
+    {%for admin in admins%}
+         <div class="justify">
+             <p>{{admin.login_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.login_img.url }}" class="figure-img img-fluid rounded center-block"  width="500", height="500">
+                <figcaption class="figure-caption ">Login</figcaption>
+            </figure>
+         <div class="justify">
+             <p>{{admin.admin_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.admin_img.url }}" class="figure-img img-fluid rounded center-block"  width="900", height="1200">
+                <figcaption class="figure-caption ">Admin Panel</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.item_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.item_img.url }}" class="figure-img img-fluid rounded center-block"  width="900", height="1200">
+                <figcaption class="figure-caption ">Items</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.profile_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.profile_img.url }}" class="figure-img img-fluid rounded center-block"  width="900", height="1200">
+                <figcaption class="figure-caption ">Profile</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.message_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.message_img.url }}" class="figure-img img-fluid rounded center-block"  width="900", height="1200">
+                <figcaption class="figure-caption ">Message</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.post_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.post_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">Post</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.comment_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.comment_img.url }}" class="figure-img img-fluid rounded center-block"  width="900", height="1200">
+                <figcaption class="figure-caption ">Comment</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.vote_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.vote_img.url }}" class="figure-img img-fluid rounded center-block"  width="900", height="1200">
+                <figcaption class="figure-caption ">Vote</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.relation_description}}</p><br/><br/>
+         </div>
+
+            <figure class="figure">
+                <img src="{{ admin.relation_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">Relation</figcaption>
+            </figure>
+
+         <div class="justify">
+             <p>{{admin.user_description}}</p><br/><br/>
+         </div>
+
+         <figure class="figure">
+                <img src="{{ admin.user_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">User</figcaption>
+          </figure>
+
+
+         <div class="justify">
+             <p>{{admin.token_description}}</p><br/><br/>
+         </div>
+
+         <figure class="figure">
+                <img src="{{ admin.token_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">Token</figcaption>
+         </figure>
+
+         <div class="justify">
+             <p>{{admin.web_manual_description}}</p><br/><br/>
+         </div>
+
+         <figure class="figure">
+                <img src="{{ admin.web_manual_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">Web Manual</figcaption>
+         </figure>
+
+
+         <div class="justify">
+             <p>{{admin.mobile_manual_description}}</p><br/><br/>
+         </div>
+
+         <figure class="figure">
+                <img src="{{ admin.mobile_manual_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">Mobile Manual</figcaption>
+         </figure>
+
+         <div class="justify">
+             <p>{{admin.admin_manual_description}}</p><br/><br/>
+         </div>
+
+         <figure class="figure">
+                <img src="{{ admin.admin_manual_img.url }}" class="figure-img img-fluid rounded center-block" width="900", height="1200">
+                <figcaption class="figure-caption ">Admin Manual</figcaption>
+         </figure>
+
+
+
+
+    {%endfor%}
+ </div>
+</body>
+</html>

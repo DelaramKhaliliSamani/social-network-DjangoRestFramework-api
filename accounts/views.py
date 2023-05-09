@@ -209,7 +209,7 @@ class FollowView(APIView):
     """""
     permission_classes = [IsAuthenticated, ]
     serializer_class = RelationSerializer
-    def get(self, request, pk):
+    def post(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         already_followed = Relation.objects.filter(to_user=user, from_user=request.user).first()
         if not already_followed:
